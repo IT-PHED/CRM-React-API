@@ -11,4 +11,5 @@ public interface IDashboardService
     Task<List<DashboardDto>> GeteLocationWiseSummary(DateTime fromDate, DateTime toDate, string? divId = "0");
     Task<List<DashboardDto>> GetSlaDIVCountSummary(DateTime fromDate, DateTime toDate, string? divId = "0");
     Task<List<DashboardDto>> GetSlaDurationSummary(DateTime fromDate, DateTime toDate, string? divId = "0");
+    Task<ComplaintMonthlyStat> CRM_MONTHLY_DEPT_STATS(string departmentId, string? regionId = null);
 }

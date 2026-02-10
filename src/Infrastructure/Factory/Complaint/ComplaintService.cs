@@ -2,10 +2,10 @@
 using System.Globalization;
 using Application.Abstractions.Data;
 using Application.Abstractions.Factory.Complaint;
+using Application.ComplaintResolution.Dto;
 using Application.Complaints.Dto;
 using Dapper;
 using Domain.Complaint;
-using Infrastructure.UnitOfWork;
 using Infrastructure.Utils;
 using Oracle.ManagedDataAccess.Client;
 using SharedKernel;
@@ -244,5 +244,58 @@ public sealed class ComplaintService(IUnitOfWork unitOfWork) : IComplaintService
             return "success";
         }
         return "something went wrong";
+    }
+
+    /// <summary>
+    /// Get customer billing information from database by month range
+    /// </summary>
+    /// <param name="monthFrom">month to start from</param>
+    /// <param name="monthTo">month to end</param>
+    /// <param name="consumerId">customer identity</param>
+    /// <returns>Customer billing information</returns>
+    public async Task<IReadOnlyList<BillingInfoInWrongMeterReadingResolutionDto>> GetBillingInfoByMonthFromAndMonthTo(DateTime monthFrom, DateTime monthTo, string consumerId)
+    {
+        var param = new OracleDynamicParameter();
+        param.Add("p_monthFrom", monthFrom);
+        param.Add("p_monthTo", monthTo);
+        param.Add("p_consumerId", consumerId);
+        param.Add(CursorConstant.CursorName, OracleDbType.RefCursor, ParameterDirection.Output);
+        IEnumerable<BillingInfoInWrongMeterReadingResolutionDto> billInfos = await unitOfWork.Connection.QueryAsync<BillingInfoInWrongMeterReadingResolutionDto>(ConsumerStoreProcedureNames.GET_BILLINGINFO_BY_MONTHFROM_AND_MONTHTO, param, transaction: unitOfWork.Transaction, commandType: CommandType.StoredProcedure);
+        return billInfos.AsList();
+    }
+
+    public async Task<IReadOnlyList<CrmComplaintDto>> QueryComplaintByDepartment(
+     string departmentId,
+     string searchTerm,
+     int pageNumber,
+     int pageSize,
+     DateTime? dateFrom = null,
+     DateTime? dateTo = null)
+    {
+        // pageSize and pageNumber are already int, no need to check if they're null or empty
+        int pageSizeNum = pageSize <= 0 ? 5000 : pageSize;
+        int pageNum = pageNumber <= 0 ? 1 : pageNumber;
+
+        var param = new OracleDynamicParameter();
+        param.Add("p_DepartmentId", departmentId, DbType.String, ParameterDirection.Input);
+        param.Add("p_PageNumber", pageNum, DbType.Int32, ParameterDirection.Input);
+        param.Add("p_PageSize", pageSizeNum, DbType.Int32, ParameterDirection.Input);
+        param.Add("p_SortColumn", "C1.CREATEDDATE", DbType.String, ParameterDirection.Input);
+        param.Add("p_SortOrder", "DESC", DbType.String, ParameterDirection.Input);
+        param.Add("p_SearchTerm", searchTerm, DbType.String, ParameterDirection.Input);
+
+        // dateFrom and dateTo are already DateTime?, no parsing needed
+        param.Add("p_DateFrom", dateFrom, DbType.Date, ParameterDirection.Input);
+        param.Add("p_DateTo", dateTo, DbType.Date, ParameterDirection.Input);
+
+        param.Add(CursorConstant.CursorName, OracleDbType.RefCursor, ParameterDirection.Output);
+
+        IEnumerable<CrmComplaintDto> crmList = await unitOfWork.Connection.QueryAsync<CrmComplaintDto>(
+            ComplaintStoreProcedureNames.QUERY_COMPLAINTS_BY_DEPARTMENT,
+            param,
+            transaction: unitOfWork.Transaction,
+            commandType: CommandType.StoredProcedure);
+
+        return crmList.AsList();
     }
 }

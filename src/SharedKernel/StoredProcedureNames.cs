@@ -29,6 +29,7 @@ public static class ConfigurationStoreProcedureNames
     public const string GET_COMPLAINTSUBTYPE = Prefix + "GET_COMPLAINTSUBTYPE";
     public const string GET_DATA_FOR_CONFIGURATION = "SPN_CRM_SLA_GET_DATA_FOR_CONFIGURATION";
 }
+
 public static class ConsumerStoreProcedureNames
 {
     private const string Prefix = "SP_CRM_";
@@ -170,7 +171,6 @@ public static class AppprovalStoreProcedureNames
 
     public const string GET_MASTER_NERC_EMAIL_COMPLAINTS = Prefix + "GET_MASTER_NERC_EMAIL_COMPLAINTS";
 
-
     public const string GET_APPROVER_REJECT_REMARK = Prefix + "GET_APPROVER_REJECT_REMARK";
     public const string GET_PRIORITY = Prefix + "GET_PRIORITY";
     public const string GET_SOURCE = Prefix + "GET_SOURCE";
@@ -216,4 +216,51 @@ public static class DashboardStoreProcedureNames
     public const string GET_SLADURATION_TICKETS = Prefix + "GETSLADURATION";
     public const string GET_SLA_COUNT_SUMMARY = Prefix + "GETSLASUMMARY";
     public const string GET_SLA_DIVCOUNT_SUMMARY = Prefix + "GETDIVWISESLASUMMARY";
+}
+
+public static class EmployeeStoreProcedureNames
+{
+    private const string Prefix = "SP_CRM_";
+    public const string GET_ALL_EMPLOYEE = Prefix + "GET_ALL_EMPLOYEE";
+    public const string GET_EMPLOYEE_IBC_BSC = Prefix + "GET_EMPLOYEE_IBC_BSC";
+    public const string GET_APPROVAL_LEVELS_BY_AMOUNT = Prefix + "GET_APPROVAL_LEVELS_BY_AMOUNT";
+    public const string GET_APPROVAL_LEVELS_DECISIONS_BY_AMOUNT_COMPLAINTID = Prefix + "GET_APPROVAL_LEVELS_DECISIONS_BY_AMOUNT_COMPLAINTID";
+    public const string GET_EMPLOYEE_FULL_DETAIL_BY_ID = Prefix + "GET_EMPLOYEE_FULL_DETAIL_BY_ID";
+    public const string GET_APPROVER_FULL_DETAIL_BY_ID = Prefix + "GET_APPROVER_FULL_DETAIL_BY_ID";
+    public const string INSERT_RESOLVED_COMPLAINT_FOR_FIELDAGENT = Prefix + "INSERT_RESOLVED_COMPLAINT_FOR_FIELDAGENT";
+    public const string UPDATE_RESOLVED_COMPLAINT_FOR_FIELDAGENT = Prefix + "UPDATE_RESOLVED_COMPLAINT_FOR_FIELDAGENT";
+    public const string INSERT_HIGH_ESITMATED_READING_RESOLVED_COMPLAINT_FOR_FIELDAGENT = Prefix + "INSERT_HIGH_ESITMATED_READING_RESOLVED_COMPLAINT_FOR_FIELDAGENT";
+    public const string INSERT_IAD_DECISION_FOR_IAD = Prefix + "INSERT_IAD_DECISION_FOR_IAD";
+    public const string INSERT_GCM_DECISION_FOR_GCM = Prefix + "INSERT_GCM_DECISION_FOR_GCM";
+    public const string INSERT_APPROVER_DECISION_FOR_APPROVER = Prefix + "INSERT_APPROVER_DECISION_FOR_APPROVER";
+    public const string GET_USER_GROUP = Prefix + "GET_USER_GROUP";
+    public const string GET_GROUP_PRIVILEGES = Prefix + "GET_GROUP_PRIVILEGES";
+    public const string GET_ALL_DESIGNATIONS = Prefix + "GET_ALL_DESIGNATIONS";
+    public const string GET_ALL_CCOBYREGION = "SPN_GET_ALL_CCO_BY_REGION";
+    public const string GET_ALL_DESKID = "SP_CRM_DESK";
+    public const string GET_SMS_TITLES = "SPN_GET_SMS_TITLE";
+    public const string GET_All_ESCALATORS = "SPN_CRM_GET_ESCALATORS";
+    public const string GET_ALL_GROUP_MEMBERS = Prefix + "GET_GROUP_MEMBERS";
+    public const string GET_USER_CRM_PERMISSIONS = "spn_crm_get_user_permission";
+    public const string GET_REGIONAL_DEPARTMENT_MEMBERS = Prefix + "GET_DEPARTMENT_MEMBERS";
+    public const string GET_REGIONS = "sp_Get_Regions";
+    public const string GET_CRM_ROLE_MENU = Prefix + "GET_ROLE_MENU";
+    public const string UPDATE_CRM_USER_PERM = Prefix + "UPDATE_USER_PERM";
+}
+
+public static class TicketProcedureNames
+{
+    private const string Prefix = "SP_CRM_";
+    public const string GET_BULKTICKET_CLOSURE_LOG = Prefix + "GET_BULKTICKET_CLOSURE_LOG";
+    public const string CLOSE_TICKET = Prefix + "CLOSE_TICKET";
+    public const string BULKTICKET_CLOSURE_LOG = Prefix + "BULKTICKET_CLOSURE_LOG";
+    public const string GET_BULKTICKET_CLOSURE_SUMMARY = Prefix + "GET_BULKTICKET_CLOSURE_SUMMARY";
+    public const string GET_TICKET_DETAIL = Prefix + "GET_TICKET_DETAIL";
+    public const string GET_SLA_DETAIL = Prefix + "GET_SLA_DETAIL";
+    public const string GET_DASHBOARDTICKET_DETAIL = Prefix + "GET_DASHBOARDTICKET_DETAIL";
+    public const string GET_ALLOCATIONDASHBOARDTICKET_DETAIL = "SPN_CRM_GET_ALLOCATIONDASHBOARDTICKET_DETAIL";
+    public const string INSERT_SMSLOG = Prefix + "INSERT_SMSLOG";
+    public const string GETTICKETSTATUS = Prefix + "GET_OUTBOUNDCALL";
+    public const string INSERT_SMSTEXT = "SPN_CRM_INSERT_SMSTEXT";
+
 }

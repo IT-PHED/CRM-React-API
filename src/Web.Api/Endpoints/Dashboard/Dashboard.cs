@@ -3,10 +3,12 @@ using Application.Dashboard.Dto;
 using Application.Dashboard.GetCategoryWiseSummary;
 using Application.Dashboard.GetDateWiseSummary;
 using Application.Dashboard.GeteLocationWiseSummary;
+using Application.Dashboard.GetMonthlyStat;
 using Application.Dashboard.GetSlaCountSummary;
 using Application.Dashboard.GetSlaDIVCountSummary;
 using Application.Dashboard.GetSlaDurationSummary;
 using Application.Dashboard.GetTicketSummary;
+using Microsoft.AspNetCore.Mvc;
 using SharedKernel;
 using Web.Api.Extensions;
 using Web.Api.Infrastructure;
@@ -102,5 +104,17 @@ internal sealed class Dashboard : IEndpoint
                  error => CustomResults.Problem(error)
             );
         }).WithTags(Tags.Dashboard).WithDescription("Fetch all the SLA Ticket Summary");
+
+        app.MapGet("dashboard/crm-reports/monthly-stat", async ([FromQuery] string departmentId, IQueryHandler<GetMonthlyStatQuery, ComplaintMonthlyStat> handler, CancellationToken cancellationToken, [FromQuery] string? regionId = null) =>
+        {
+            var query = new GetMonthlyStatQuery(departmentId, regionId);
+
+            Result<ComplaintMonthlyStat> result = await handler.Handle(query, cancellationToken);
+
+            return result.Match(
+                 value => Results.Ok(ApiResponse<ComplaintMonthlyStat>.Success(value, "All Department Complaint monthly Stats")),
+                 error => CustomResults.Problem(error)
+            );
+        }).WithTags(Tags.Dashboard).WithDescription("Fetch the monthly department Stats");
     }
 }

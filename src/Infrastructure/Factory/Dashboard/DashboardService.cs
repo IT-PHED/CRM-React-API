@@ -124,4 +124,27 @@ internal sealed class DashboardService(IUnitOfWork unitOfWork) : IDashboardServi
         IEnumerable<DashboardDto> ticketSummary = await unitOfWork.Connection.QueryAsync<DashboardDto>(DashboardStoreProcedureNames.GET_TICKET_SUMMARY, param, transaction: unitOfWork.Transaction, commandType: CommandType.StoredProcedure);
         return ticketSummary.AsList();
     }
+    public async Task<ComplaintMonthlyStat> CRM_MONTHLY_DEPT_STATS(string departmentId, string? regionId = null)
+    {
+        var param = new DynamicParameters();
+        param.Add("p_total_complaints", dbType: DbType.Int32, direction: ParameterDirection.Output);
+        param.Add("p_unresolved_complaints", dbType: DbType.Int32, direction: ParameterDirection.Output);
+        param.Add("p_resolved_complaints", dbType: DbType.Int32, direction: ParameterDirection.Output);
+        param.Add("p_overdue_complaints", dbType: DbType.Int32, direction: ParameterDirection.Output);
+        param.Add("p_today_complaints", dbType: DbType.Int32, direction: ParameterDirection.Output);
+        param.Add("p_status", dbType: DbType.String, direction: ParameterDirection.Output, size: 200);
+        param.Add("p_DeptId", departmentId);
+        param.Add("p_RegionId", regionId);
+
+        await unitOfWork.Connection.ExecuteAsync(ComplaintStoreProcedureNames.GET_MONTHLY_COMPLAINTS_STAT, param, transaction: unitOfWork.Transaction, commandType: CommandType.StoredProcedure);
+
+        return new ComplaintMonthlyStat
+        {
+            Total = param.Get<int>("p_total_complaints"),
+            Unresolved = param.Get<int>("p_unresolved_complaints"),
+            Resolved = param.Get<int>("p_resolved_complaints"),
+            Overdue = param.Get<int>("p_overdue_complaints"),
+            Today = param.Get<int>("p_today_complaints"),
+        };
+    }
 }

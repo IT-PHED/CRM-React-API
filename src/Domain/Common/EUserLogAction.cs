@@ -15,7 +15,9 @@ public enum EUserLogAction
     UPLOAD = 11,
     VERIFY_OTP = 12,
     LOG_COMPLAINT = 13,
-    REASSIGN_COMPLAINT = 14
+    REASSIGN_COMPLAINT = 14,
+    APPROVE_COMPLAINT = 15,
+    CLOSE_COMPLAINT = 16
 }
 
 public enum EUserLogStatus
@@ -44,5 +46,7 @@ public enum EUserLogModule
     LOGOUT = 10,
     NSC = 11,
     LOG_COMPLAINT = 12,
-    REASSIGN_COMPLAINT = 13
+    REASSIGN_COMPLAINT = 13,
+    APPROVE_COMPLAINT = 14,
+    CLOSE_COMPLAINT = 15
 }

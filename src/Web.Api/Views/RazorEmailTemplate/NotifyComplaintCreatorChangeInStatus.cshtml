@@ -1,0 +1,96 @@
+﻿@model Application.ComplaintResolution.Dto.UpdateComplaintStatusEmailDto;
+@{
+	Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<title>Complaint Status Status Updated</title>
+</head>
+
+<body style="margin:0; padding:0; background-color:#f4f4f4; font-family: Arial, sans-serif;">
+	<table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f4f4; padding:20px 0;">
+		<tr>
+			<td align="center">
+				<table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff; border-radius:6px; overflow:hidden; border:1px solid #e0e0e0;">
+					<tr>
+						<td style="background-color:#2c3e50; padding:20px; text-align:center; color:#ffffff; font-size:20px; font-weight:bold;">
+							Complaint Status Status Updated
+						</td>
+					</tr>
+
+					<!-- Body -->
+					<tr>
+						<td style="padding:20px; color:#333333; font-size:14px; line-height:1.6;">
+
+							<p style="margin-bottom:20px;">
+								Dear <strong>@Model.StaffName</strong>,
+							</p>
+
+							<p style="margin-bottom:20px;">
+								Your complaint with the details below has been successfully Updated.
+							</p>
+
+							<!-- Complaint Details -->
+							<table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:20px; border-collapse:collapse;">
+								<tr>
+									<td style="padding:8px; border:1px solid #dddddd; font-weight:bold; width:160px;">Complaint ID</td>
+									<td style="padding:8px; border:1px solid #dddddd;">@Model.ComplaintId</td>
+								</tr>
+
+								<tr>
+									<td style="padding:8px; border:1px solid #dddddd; font-weight:bold;">Category</td>
+									<td style="padding:8px; border:1px solid #dddddd;">@Model.Category</td>
+								</tr>
+
+								<tr>
+									<td style="padding:8px; border:1px solid #dddddd; font-weight:bold;">Description</td>
+									<td style="padding:8px; border:1px solid #dddddd;">@Model.Description</td>
+								</tr>
+
+								<tr>
+									<td style="padding:8px; border:1px solid #dddddd; font-weight:bold;">Status</td>
+									<td style="padding:8px; border:1px solid #dddddd; color:#27ae60; font-weight:bold;">@Model.Status</td>
+								</tr>
+
+								<tr>
+									<td style="padding:8px; border:1px solid #dddddd; font-weight:bold;">Closed By</td>
+									<td style="padding:8px; border:1px solid:#dddddd;">@Model.ClosedBy</td>
+								</tr>
+
+								<tr>
+									<td style="padding:8px; border:1px solid #dddddd; font-weight:bold;">Date Closed</td>
+									<td class="text-capitalize" style="padding:8px; border:1px solid:#dddddd;">@Model.ClosedDate</td>
+								</tr>
+							</table>
+
+							<!-- Closing Remark -->
+							<p style="margin-bottom:10px; font-weight:bold;">Closing Remark:</p>
+
+							<div style="background:#fafafa; border:1px solid #e6e6e6; padding:12px; border-radius:4px; margin-bottom:20px;">
+								@Model.ClosingRemark
+							</div>
+
+							<p style="margin-bottom:20px;">
+								If you have any additional concerns, feel free to reach out.
+							</p>
+
+							<p style="margin-bottom:5px;">Thank you,</p>
+							<p style="font-weight:bold; margin:0;">PHED Customer Support</p>
+						</td>
+					</tr>
+
+					<!-- Footer -->
+					<tr>
+						<td style="background:#f4f4f4; padding:15px; text-align:center; font-size:12px; color:#777777;">
+							&copy; @DateTime.UtcNow.Year PHED. All rights reserved.
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>

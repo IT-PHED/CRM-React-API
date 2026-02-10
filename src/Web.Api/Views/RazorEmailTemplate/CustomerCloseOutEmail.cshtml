@@ -1,0 +1,42 @@
+﻿@model Application.ComplaintResolution.Dto.CustomerCloseOutEmailViewModelDto;
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<style>
+		body {
+			font-family: Arial;
+			color: #333;
+		}
+
+		.box {
+			background: #f6f6f6;
+			padding: 20px;
+			border-radius: 8px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="box">
+		<h2>Your Complaint Has Been Resolved</h2>
+
+		<p>Hello @Model.CustomerName,</p>
+
+		<p>We are pleased to inform you that your complaint has been resolved.</p>
+
+		<p><strong>Ticket Number:</strong> @Model.Ticket</p>
+
+		<p><strong>Summary:</strong></p>
+		<p>@Model.ComplaintDescription</p>
+
+		<p><strong>Closed On:</strong> @Model.ClosedDate.ToString("dd MMM yyyy HH:mm")</p>
+
+		<br />
+		<p>If you experience further issues or have questions, feel free to contact us.</p>
+
+		<p>Thank you for reaching out to us.</p>
+	</div>
+</body>
+</html>

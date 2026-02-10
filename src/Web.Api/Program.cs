@@ -84,7 +84,7 @@ app.UseAuthentication();
 
 app.UseAuthorization();
 
-app.MapGet("/api/ping", () => "Hello from CRM New API!");
+app.MapGet("/api/ping", () => "Hello from CRM New API!").WithTags("Ping");
 
 app.MapControllers();
 

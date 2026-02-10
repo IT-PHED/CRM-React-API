@@ -5,9 +5,13 @@ using Application.Abstractions.Data;
 using Application.Abstractions.Factory;
 using Application.Abstractions.Factory.Area;
 using Application.Abstractions.Factory.Complaint;
+using Application.Abstractions.Factory.ComplaintResolution;
 using Application.Abstractions.Factory.Configuration;
 using Application.Abstractions.Factory.Consumer;
 using Application.Abstractions.Factory.Dashboard;
+using Application.Abstractions.Factory.EmployeeManagement;
+using Application.Abstractions.Factory.EscalationMatrixResolution;
+using Application.Abstractions.Factory.SLA;
 using Application.Abstractions.Repository;
 using Infrastructure.Authentication;
 using Infrastructure.Authorization;
@@ -16,9 +20,13 @@ using Infrastructure.DomainEvents;
 using Infrastructure.Factory;
 using Infrastructure.Factory.Area;
 using Infrastructure.Factory.Complaint;
+using Infrastructure.Factory.ComplaintResolution;
 using Infrastructure.Factory.Configuration;
 using Infrastructure.Factory.Consumer;
 using Infrastructure.Factory.Dashboard;
+using Infrastructure.Factory.EmployeeManagement;
+using Infrastructure.Factory.EscalationMatrixResolution;
+using Infrastructure.Factory.Sla;
 using Infrastructure.Repository;
 using Infrastructure.Time;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -50,16 +58,22 @@ public static class DependencyInjection
         services.AddTransient<IDomainEventsDispatcher, DomainEventsDispatcher>();
 
         ///Factory Services
-        services.AddScoped<IEmailService, EmailService>();
-        services.AddScoped<IUserService, UserService>();
         services.AddTransient<IOtpHandler, OtpHandler>();
         services.AddTransient<IRazorViewToString, RazorViewToStringService>();
+
+        services.AddScoped<IEmailService, EmailService>();
+        services.AddScoped<IUserService, UserService>();
         services.AddScoped<IAppService, AppService>();
         services.AddScoped<IConsumerService, ConsumerService>();
         services.AddScoped<IComplaintService, ComplaintService>();
         services.AddScoped<IConfigurationService, ConfigurationService>();
         services.AddScoped<IAreaService, AreaService>();
         services.AddScoped<IDashboardService, DashboardService>();
+        services.AddScoped<IComplaintResolutionService, ComplaintResolutionService>();
+        services.AddScoped<ISmsService, SmsService>();
+        services.AddScoped<IEscalationMatrixResolutionService, EscalationMatrixResolutionService>();
+        services.AddScoped<IEmployeeManagementService, EmployeeManagementService>();
+        services.AddScoped<ISlaService, SlaService>();
 
         return services;
     }

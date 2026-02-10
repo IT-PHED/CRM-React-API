@@ -1,4 +1,5 @@
-﻿using Application.Complaints.Dto;
+﻿using Application.ComplaintResolution.Dto;
+using Application.Complaints.Dto;
 using Domain.Complaint;
 
 namespace Application.Abstractions.Factory.Complaint;
@@ -16,4 +17,6 @@ public interface IComplaintService
     Task<IReadOnlyList<CrmComplaintDto>> GetAllDepartmentComplaintAndStatus(string departmentId, string status, int? pageNumber, int? pageSize, DateTime? dateFrom = null, DateTime? dateTo = null);
     Task<IReadOnlyList<CrmComplaintDto>> QueryComplaintRegionAndStatus(string departmentId, string region, string status);
     Task<string> ReassignComplaint(string ticketId, string consumerId, string reassignStaffId, string? actorId = null);
+    Task<IReadOnlyList<BillingInfoInWrongMeterReadingResolutionDto>> GetBillingInfoByMonthFromAndMonthTo(DateTime monthFrom, DateTime monthTo, string consumerId);
+    Task<IReadOnlyList<CrmComplaintDto>> QueryComplaintByDepartment(string departmentId, string searchTerm, int pageNumber, int pageSize, DateTime? dateFrom = null, DateTime? dateTo = null);
 }

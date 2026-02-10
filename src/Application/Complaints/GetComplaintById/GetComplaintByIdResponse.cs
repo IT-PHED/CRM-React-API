@@ -36,4 +36,6 @@ public class GetComplaintByIdQueryResponse
     public string? Filepath { get; set; }                         // ccc.filepath
     public string? Monthfrom { get; set; }
     public string? Monthto { get; set; }
+    public string? CreatedBy { get; set; }
+    public string? CreatedByEmail { get; set; }
 }

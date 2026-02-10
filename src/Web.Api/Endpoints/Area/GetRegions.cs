@@ -2,6 +2,7 @@
 using Application.Area.GetRegions;
 using Application.Configuration.Dto;
 using SharedKernel;
+using Web.Api.Endpoints.ComplaintResolution;
 using Web.Api.Extensions;
 using Web.Api.Infrastructure;
 
