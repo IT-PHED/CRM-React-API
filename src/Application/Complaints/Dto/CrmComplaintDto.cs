@@ -44,4 +44,5 @@ public class CrmComplaintDto
     public string Region_Id { get; set; }
     public string Group_Id { get; set; }
     public string Region { get; set; }
+    public string AssignedTo { get; set; }
 }
