@@ -116,6 +116,7 @@ public static class ComplaintStoreProcedureNames
     public const string SPN_CommentNERCComplaint = "SPN_CRM_Insert_Complaint_Comment";
     public const string SPN_GetComments = "SPN_CRM_Get_Complaint_Comments";
     public const string INSERT_MASTER_COMPLAINT = "SP_CRM_MASTER_COMPLAINT_TRANSACTION";
+    public const string INSERT_MASTER_COMPLAINT_WITHOUT_ACCOUNT = Prefix + "MASTER_COMPLAINT_TRANSACTION_WITHOUT_ACCOUNT";
 
     public const string GET_COMPLAINT_HISTORY = Prefix + "GET_COMPLAINT_HISTORY";
     public const string GET_SIXMONTH_BILLDETAILS = Prefix + "GET_SIXMONTH_BILLDETAILS";

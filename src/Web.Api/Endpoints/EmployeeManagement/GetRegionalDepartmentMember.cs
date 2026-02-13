@@ -9,13 +9,13 @@ namespace Web.Api.Endpoints.EmployeeManagement;
 
 public class GetRegionalDepartmentMember : IEndpoint
 {
-    internal sealed record Request(string DepartmentId, string AccountNumber);
+    internal sealed record Request(string DepartmentId, string AccountNumber, string RegionId);
 
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
         app.MapGet("employees/regional-department-member", async ([AsParameters] Request request, IQueryHandler<GetRegionalDepartmentMembersQuery, IEnumerable<UserRegionalProfileDto>> handler, CancellationToken cancellationToken) =>
         {
-            var query = new GetRegionalDepartmentMembersQuery(request.DepartmentId, request.AccountNumber);
+            var query = new GetRegionalDepartmentMembersQuery(request.DepartmentId, request.AccountNumber, request.RegionId);
 
             Result<IEnumerable<UserRegionalProfileDto>> result = await handler.Handle(query, cancellationToken);
 

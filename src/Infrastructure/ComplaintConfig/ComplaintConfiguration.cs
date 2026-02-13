@@ -58,7 +58,7 @@ internal sealed class ComplaintConfiguration : IEntityTypeConfiguration<Complain
         builder.Property(e => e.Feedback).HasColumnName("FEEDBACK").HasMaxLength(4000);
         builder.Property(e => e.DepartmentId).HasColumnName("DEPARTMENTID").HasMaxLength(50);
         builder.Property(e => e.ResolvedBy).HasColumnName("RESOLVEDBY").HasMaxLength(50);
-        builder.Property(e => e.MediaUrl).HasColumnName("MEDIAURL").HasMaxLength(4000);
+        builder.Property(e => e.MediaUrl).HasColumnName("MEDIAURL").HasMaxLength(4000); 
         builder.Property(e => e.ClosedBy).HasColumnName("CLOSEDBY").HasMaxLength(60);
         builder.Property(e => e.ClosedByRemark).HasColumnName("CLOSEDBY_REMARK").HasMaxLength(4000);
         builder.Property(e => e.ClosedDate).HasColumnName("CLOSED_DATE");
