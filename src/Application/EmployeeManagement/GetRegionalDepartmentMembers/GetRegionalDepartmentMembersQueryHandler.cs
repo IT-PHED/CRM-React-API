@@ -11,7 +11,7 @@ internal sealed class GetRegionalDepartmentMembersQueryHandler(IEmployeeManageme
     {
         try
         {
-            IReadOnlyList<Domain.User.UserProfile> employees = await employeeManagementService.GetRegionalDepartmentMember(query.DepartmentId, query.AccountNumber);
+            IReadOnlyList<Domain.User.UserProfile> employees = await employeeManagementService.GetRegionalDepartmentMember(query.DepartmentId, query.AccountNumber, query.RegionId);
 
             if (employees == null)
             {

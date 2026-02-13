@@ -4,4 +4,4 @@ using Application.EmployeeManagement.Dto;
 
 namespace Application.EmployeeManagement.GetRegionalDepartmentMembers;
 
-public sealed record GetRegionalDepartmentMembersQuery(string DepartmentId, string AccountNumber) : IQuery<IEnumerable<UserRegionalProfileDto>>;
+public sealed record GetRegionalDepartmentMembersQuery(string DepartmentId, string AccountNumber, string RegionId) : IQuery<IEnumerable<UserRegionalProfileDto>>;

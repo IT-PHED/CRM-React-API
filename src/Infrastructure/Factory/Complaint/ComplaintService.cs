@@ -104,6 +104,74 @@ public sealed class ComplaintService(IUnitOfWork unitOfWork) : IComplaintService
         }
     }
 
+    public async Task<ComplaintTransactionResponse2> InsertMasterComplaintTransactionWithoutAccountNoAsync(InsertMasterComplaintDto2 data)
+    {
+        var parameters = new OracleDynamicParameter();
+        parameters.Add("p_complaint_id", data.ComplaintId);
+        parameters.Add("p_complainttypeid", data.ComplaintTypeId);
+        parameters.Add("p_complaintsubtypeid", data.ComplaintSubTypeId);
+        parameters.Add("p_status", data.Status);
+        parameters.Add("p_source", data.Source);
+        parameters.Add("p_ticket", data.Ticket);
+        parameters.Add("p_dategenerated", data.DateGenerated);
+        parameters.Add("p_dateresolved", data.DateResolved);
+        parameters.Add("p_priority", data.Priority);
+        parameters.Add("p_remark", data.Remark);
+        parameters.Add("p_cons_name", data.ConsName);
+        parameters.Add("p_cons_telephoneno", data.ConsTelephoneNo);
+        parameters.Add("p_con_maxdemand", data.ConMaxDemand);
+        parameters.Add("p_cons_category", data.ConsCategory);
+        parameters.Add("p_cons_addr1", data.ConsAddr1);
+        parameters.Add("p_con_emailid", data.ConEmailId);
+        parameters.Add("p_con_mobileno", data.ConMobileNo);
+        parameters.Add("p_cons_type", data.ConsType);
+        parameters.Add("p_purpose", data.Purpose);
+        parameters.Add("p_createdby", data.CreatedBy);
+        parameters.Add("p_createddate", data.CreatedDate);
+        parameters.Add("p_departmentid", data.DepartmentId);
+        parameters.Add("p_assignto", data.AssignTo);
+        parameters.Add("p_constraint_id", data.ConstraintId);
+        parameters.Add("p_monthfrom", data.MonthFrom);
+        parameters.Add("p_monthto", data.MonthTo);
+        parameters.Add("p_insert_constraint", 1);
+        parameters.Add("p_regionid", data.RegionId);
+
+        parameters.Add("o_status_code", dbType: DbType.Decimal, direction: ParameterDirection.Output);
+        parameters.Add("o_status_message", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
+
+        try
+        {
+            await unitOfWork.Connection.ExecuteAsync(ComplaintStoreProcedureNames.INSERT_MASTER_COMPLAINT_WITHOUT_ACCOUNT, parameters, transaction: unitOfWork.Transaction, commandType: CommandType.StoredProcedure);
+
+            Type type = parameters.GetType();
+            System.Reflection.PropertyInfo? statusCodeProp = type.GetProperty("o_status_code");
+            System.Reflection.PropertyInfo? statusMessageProp = type.GetProperty("o_status_message");
+
+            object? rawStatusCode = statusCodeProp?.GetValue(parameters);
+            string statusMessage = (string)statusMessageProp?.GetValue(parameters) ?? "Complaint created successfully";
+
+            int statusCode = rawStatusCode switch
+            {
+                decimal d => Convert.ToInt32(d),
+                int i => i,
+                string s when int.TryParse(s, out int parsed) => parsed,
+                _ => 0
+            };
+
+            return new ComplaintTransactionResponse2(statusCode, statusMessage);
+        }
+        catch (OracleException ex)
+        {
+            Console.WriteLine($"Oracle Error: {ex.Message}");
+            return new ComplaintTransactionResponse2(-99, $"Database Error: {ex.Message}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"General Error: {ex.Message}");
+            return new ComplaintTransactionResponse2(-999, $"Application Error: {ex.Message}");
+        }
+    }
+
     /// <summary>
     /// Check if a customer complaint is logged already
     /// </summary>

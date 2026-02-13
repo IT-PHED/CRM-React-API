@@ -11,6 +11,7 @@ public interface IComplaintService
     Task<T> GetComplaintById<T>(string complaintId);
     Task<bool> CanRegisterConsumerComplaint(string consumerId, string complaintTypeId, string complaintSubTypeId);
     Task<ComplaintTransactionResponse> InsertMasterComplaintTransactionAsync(InsertMasterComplaintDto data);
+    Task<ComplaintTransactionResponse2> InsertMasterComplaintTransactionWithoutAccountNoAsync(InsertMasterComplaintDto2 data);
     Task<ConsumerComplaintDto> GetComplaintByTicketNumber(string ticketNumber);
     Task<IReadOnlyList<CrmComplaintDto>> GetAllComplaints(int pageNumber, int pageSize, string? searchTerm = null, DateTime? dateFrom = null, DateTime? dateTo = null);
     Task<IReadOnlyList<CrmComplaintDto>> GetAllDepartmentComplaint(string departmentId, int? pageNumber, int? pageSize, DateTime? dateFrom = null, DateTime? dateTo = null);

@@ -15,7 +15,7 @@ public interface IEmployeeManagementService
     Task<UserGroupDto> GetUserGroup(string userId);
     Task<object> UpdateUserCRMRole(string staffId, string newRole);
     Task<IReadOnlyList<ScreenPrivilegeDto>> GetGroupPrivileges(int groupid);
-    Task<IReadOnlyList<UserProfile>> GetRegionalDepartmentMember(string departmentId, string accountNumber);
+    Task<IReadOnlyList<UserProfile>> GetRegionalDepartmentMember(string departmentId, string accountNumber, string RegionId);
     Task<IReadOnlyList<UserProfile>> GetGroupMembers(int groupid);
     Task<CrmUserPermissionDto> GetEmployeeCRMPermission(string userId);
     Task<IReadOnlyList<DesignationDto>> GetDesignationsAsync();

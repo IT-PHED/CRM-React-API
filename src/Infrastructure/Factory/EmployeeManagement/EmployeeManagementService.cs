@@ -106,11 +106,12 @@ internal sealed class EmployeeManagementService(IUnitOfWork unitOfWork) : IEmplo
         return result.AsList();
     }
 
-    public async Task<IReadOnlyList<UserProfile>> GetRegionalDepartmentMember(string departmentId, string accountNumber)
+    public async Task<IReadOnlyList<UserProfile>> GetRegionalDepartmentMember(string departmentId, string accountNumber, string RegionId)
     {
         var param = new OracleDynamicParameter();
         param.Add("p_DEPARTMENTID", departmentId);
         param.Add("P_ACCOUNT_NUMBER", accountNumber);
+        param.Add("p_REGIONID", RegionId);
         param.Add(CursorConstant.CursorName, OracleDbType.RefCursor, ParameterDirection.Output);
 
         IEnumerable<UserProfile> escalators = await unitOfWork.Connection.QueryAsync<UserProfile>(EmployeeStoreProcedureNames.GET_REGIONAL_DEPARTMENT_MEMBERS, param, transaction: unitOfWork.Transaction, commandType: CommandType.StoredProcedure);
